@@ -62,7 +62,7 @@ class Consumer
                     $connection_name = $consumer->connection ?? 'default';
                     $tube = $consumer->tube ?? 'default';
                     $reserve_timeout = $consumer->reserve_timeout ?? 10;
-                    Client::watch($tube);
+                    Client::watch($tube, $connection_name);
                     while(!($consumer->quit ?? false)) {
                         $job = Client::reserve_with_timeout($reserve_timeout, $connection_name);
                         if (is_null($job)) {
